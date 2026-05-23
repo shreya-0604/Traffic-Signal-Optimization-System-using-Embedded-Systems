@@ -43,7 +43,7 @@ The Traffic Signal Optimization System using Embedded Systems is an Arduino-base
 ---
 
 ## 📷 Project Output
-![Simulation](trafficsignal.png)
+![Simulation](simulation.png)
 
 ---
 
