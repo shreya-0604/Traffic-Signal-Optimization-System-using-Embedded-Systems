@@ -50,6 +50,7 @@ The Traffic Signal Optimization System using Embedded Systems is an Arduino-base
 ## 🌐 Website Files
 - `index.html` → Web interface  
 - `style.css` → Styling of webpage  
+- `script.js` → Website functionality    
 
 ---
 
