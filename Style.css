@@ -1,0 +1,14 @@
+.status-icon {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.emergency button {
+    margin: 5px;
+    background: #dc3545;
+}
+
+.emergency button:hover {
+    background: #c82333;
+}

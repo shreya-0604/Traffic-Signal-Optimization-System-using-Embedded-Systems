@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Traffic System</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f4f6f8;
+}
+
+header {
+    background: #1f3c88;
+    color: white;
+    padding: 20px;
+}
+
+.signal {
+    margin: 30px auto;
+    width: 80px;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.light {
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+.red { background: red; }
+.yellow { background: yellow; }
+.green { background: limegreen; }
+
+.status-icon {
+    font-size: 22px;
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.emergency button {
+    background: #dc3545;
+    color: white;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>🚦 Smart Traffic System</h1>
+</header>
+
+<h3>Vehicle Density</h3>
+<input type="range" id="density" min="0" max="100" value="30">
+<span id="densityValue">30</span>%
+
+<div class="status-icon" id="statusIcon">🟢 Low Traffic</div>
+
+<div class="emergency">
+<button onclick="activateEmergency('ambulance')">🚑</button>
+<button onclick="activateEmergency('fire')">🚒</button>
+<button onclick="activateEmergency('police')">🚓</button>
+</div>
+
+<br>
+<button onclick="optimizeSignal()">Optimize</button>
+
+<div class="signal">
+<div id="red" class="light red"></div>
+<div id="yellow" class="light yellow"></div>
+<div id="green" class="light green"></div>
+</div>
+
+<p id="result"></p>
+
+<script>
+
+// Wait until page loads
+window.onload = function(){
+
+const red = document.getElementById("red");
+const yellow = document.getElementById("yellow");
+const green = document.getElementById("green");
+const densitySlider = document.getElementById("density");
+const densityValue = document.getElementById("densityValue");
+const result = document.getElementById("result");
+const statusIcon = document.getElementById("statusIcon");
+
+let emergencyActive = false;
+
+// Update slider value
+densitySlider.oninput = function () {
+    densityValue.textContent = this.value;
+};
+
+// Turn off all lights
+function turnOffLights() {
+    red.style.opacity = 0.3;
+    yellow.style.opacity = 0.3;
+    green.style.opacity = 0.3;
+}
+
+// Optimize traffic
+window.optimizeSignal = function () {
+
+    if (emergencyActive) return;
+
+    let density = parseInt(densitySlider.value);
+    turnOffLights();
+
+    if (density < 30) {
+        green.style.opacity = 1;
+        statusIcon.innerHTML = "🟢 Low Traffic";
+        result.innerHTML = "Smooth flow";
+    } 
+    else if (density < 70) {
+        yellow.style.opacity = 1;
+        statusIcon.innerHTML = "🟡 Medium Traffic";
+        result.innerHTML = "Moderate flow";
+    } 
+    else {
+        red.style.opacity = 1;
+        statusIcon.innerHTML = "🔴 High Traffic";
+        result.innerHTML = "Heavy congestion";
+    }
+}
+
+// Emergency override
+window.activateEmergency = function(type){
+
+    emergencyActive = true;
+    turnOffLights();
+
+    green.style.opacity = 1;
+
+    let vehicle = {
+        ambulance: "🚑 Ambulance",
+        fire: "🚒 Fire Brigade",
+        police: "🚓 Police"
+    };
+
+    statusIcon.innerHTML = "🚨 Emergency";
+    result.innerHTML = vehicle[type] + " → Priority GREEN";
+
+    setTimeout(() => {
+        emergencyActive = false;
+        optimizeSignal();
+    }, 5000);
+}
+
+}
+
+</script>
+
+</body>
+</html>
