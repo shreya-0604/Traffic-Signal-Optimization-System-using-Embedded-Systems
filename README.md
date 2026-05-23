@@ -55,7 +55,7 @@ The Traffic Signal Optimization System using Embedded Systems is an Arduino-base
 ---
 
 ## 🌍 Live Website
-https://shreya-0604.github.io/smart-traffic-system-/
+https://shreya-0604.github.io/Traffic-Signal-Optimization-System-using-Embedded-Systems/
 
 ---
 
